@@ -1,0 +1,49 @@
+site_name: IsoVAE Documentation
+site_description: Isoform-usage prediction and long-read isoform-usage denoising for single-cell RNA-seq
+site_url: https://ultraypy.github.io/IsoVAE/
+repo_url: https://github.com/ultraypy/IsoVAE
+repo_name: ultraypy/IsoVAE
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Quick start: quickstart.md
+  - Data format: data-format.md
+  - API reference: api.md
+  - Deployment guide: deployment.md
+  - FAQ: faq.md
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - search.highlight
+  palette:
+    - scheme: default
+      primary: teal
+      accent: cyan
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            docstring_style: google
+            show_source: true
+            show_root_heading: true
+            show_root_full_path: false
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite

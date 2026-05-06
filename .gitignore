@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Environments
+.venv/
+venv/
+.env
+
+# Large data/checkpoints/outputs
+*.h5ad
+*.h5
+*.pt
+*.pth
+h5ad_raw/
+data/
+outputs/
+examples/outputs/
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/

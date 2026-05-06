@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "isovae"
+version = "0.1.0"
+description = "IsoVAE: isoform-usage prediction and long-read isoform-usage denoising for single-cell RNA-seq"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+  {name = "IsoVAE developers"}
+]
+keywords = [
+  "single-cell RNA-seq",
+  "isoform usage",
+  "long-read RNA-seq",
+  "variational autoencoder",
+  "denoising"
+]
+dependencies = [
+  "numpy>=1.23",
+  "pandas>=1.5",
+  "scipy>=1.9",
+  "scikit-learn>=1.2",
+  "anndata>=0.9",
+  "torch>=2.0",
+  "matplotlib>=3.6",
+  "seaborn>=0.12"
+]
+
+[project.optional-dependencies]
+docs = [
+  "mkdocs>=1.5",
+  "mkdocs-material>=9.5",
+  "mkdocstrings[python]>=0.24"
+]
+dev = [
+  "pytest",
+  "ruff"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+
+[project.urls]
+Homepage = "https://github.com/ultraypy/IsoVAE"
+Documentation = "https://ultraypy.github.io/IsoVAE/"
+Repository = "https://github.com/ultraypy/IsoVAE"
+Issues = "https://github.com/ultraypy/IsoVAE/issues"
