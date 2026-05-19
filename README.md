@@ -6,6 +6,7 @@ IsoVAE is a Python package for single-cell isoform-usage analysis. It supports:
 2. **Long-read isoform-usage denoising** from sparse long-read isoform count matrices.
 
 IsoVAE models **within-gene isoform usage proportions**, not absolute transcript abundance.
+
 Tutorial: https://ultraypy.github.io/IsoVAE/
 
 ## Installation
