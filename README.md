@@ -57,38 +57,4 @@ denoised_usage, noisy_usage, denoise_meta = denoise_isoform_usage(artifact, iso_
 denoised_usage.to_csv("denoised_isoform_usage.csv")
 ```
 
-## Documentation
 
-The documentation source is in `docs/` and can be built with MkDocs:
-
-```bash
-pip install -e ".[docs]"
-mkdocs serve
-```
-
-To deploy to GitHub Pages:
-
-```bash
-mkdocs gh-deploy
-```
-
-See `docs/deployment.md` for deployment instructions for GitHub Pages, Read the Docs, Netlify and Vercel.
-
-## Repository layout
-
-```text
-.
-├── src/isovae/        # Python package
-├── docs/              # Documentation source
-├── mkdocs.yml         # Documentation configuration
-├── pyproject.toml     # Package metadata
-├── requirements.txt
-├── LICENSE
-└── README.md
-```
-
-Large data files, AnnData objects, model checkpoints and manuscript outputs are not included in the package.
-
-## Citation
-
-If you use IsoVAE, please cite the accompanying manuscript after publication.
