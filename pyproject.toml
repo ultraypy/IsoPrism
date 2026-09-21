@@ -3,21 +3,21 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "isovae"
-version = "0.1.0"
-description = "IsoVAE: isoform-usage prediction and long-read isoform-usage denoising for single-cell RNA-seq"
+name = "isoprism"
+version = "0.2.0"
+description = "IsoPrism: terminal-aware within-gene isoform allocation from short-read expression"
 readme = "README.md"
-requires-python = ">=3.10"
-license = "MIT"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
 authors = [
-  {name = "IsoVAE developers"}
+  {name = "IsoPrism developers"}
 ]
 keywords = [
   "single-cell RNA-seq",
   "isoform usage",
   "long-read RNA-seq",
-  "variational autoencoder",
-  "denoising"
+  "spatial transcriptomics",
+  "attention"
 ]
 dependencies = [
   "numpy>=1.23",
@@ -25,15 +25,17 @@ dependencies = [
   "scipy>=1.9",
   "scikit-learn>=1.2",
   "anndata>=0.9",
-  "torch>=2.0",
+  "torch>=2.2",
   "matplotlib>=3.6",
-  "seaborn>=0.12"
+  "h5py>=3.8",
+  "pyyaml>=6",
+  "threadpoolctl>=3"
 ]
 
 [project.optional-dependencies]
 docs = [
-  "mkdocs>=1.5",
-  "mkdocs-material>=9.5",
+  "mkdocs>=1.5,<2",
+  "mkdocs-material>=9.5,<10",
   "mkdocstrings[python]>=0.24"
 ]
 dev = [
@@ -43,12 +45,23 @@ dev = [
 
 [tool.setuptools.packages.find]
 where = ["src"]
+include = ["isoprism*", "short2long*"]
+
+[project.scripts]
+isoprism-predict = "isoprism.predict:main"
+isoprism-prepare = "isoprism.prepare:main"
+isoprism-benchmark = "isoprism.benchmark:main"
+isoprism-train = "isoprism.benchmark:train_main"
+isoprism-report = "isoprism.report:main"
 
 [tool.ruff]
 line-length = 100
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
 [project.urls]
-Homepage = "https://github.com/ultraypy/IsoVAE"
-Documentation = "https://ultraypy.github.io/IsoVAE/"
-Repository = "https://github.com/ultraypy/IsoVAE"
-Issues = "https://github.com/ultraypy/IsoVAE/issues"
+Homepage = "https://github.com/ultraypy/IsoPrism"
+Documentation = "https://github.com/ultraypy/IsoPrism/tree/main/docs"
+Repository = "https://github.com/ultraypy/IsoPrism"
+Issues = "https://github.com/ultraypy/IsoPrism/issues"

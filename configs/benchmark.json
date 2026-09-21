@@ -1,0 +1,14 @@
+{
+  "datasets": {
+    "cross_donor": {"path": "data/processed/crc_paired", "column": "donor", "holdout": "PS018"},
+    "cross_dataset": {"path": "data/processed/harmonized_ont_pacbio_author_v3", "column": "domain", "holdout": "FLAMES_ONT"},
+    "cross_disease": {"path": "data/processed/crc_paired", "column": "condition", "holdout": "tumor"},
+    "cross_platform": {"path": "data/processed/harmonized_ont_pacbio_author_v3", "column": "domain", "holdout": "CRC_PacBio"},
+    "spatial": {"path": "data/processed/post_mi_spatial", "column": "section", "holdout": "D"}
+  },
+  "annotations": {
+    "cross_donor": "data/raw/crc_cross_donor/extracted/gffcmp.query.all_samples.combined.colored.sorted.gff3",
+    "cross_disease": "data/raw/crc_cross_donor/extracted/gffcmp.query.all_samples.combined.colored.sorted.gff3",
+    "spatial": "data/raw/post_mi_spatial/gffcmp.multi_exons.annotated.gtf"
+  }
+}

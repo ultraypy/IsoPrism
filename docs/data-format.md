@@ -1,52 +1,28 @@
 # Data format
 
-IsoVAE works with `AnnData` objects.
+## Prediction
 
-## Short-read gene-expression matrix
+Supply an AnnData `.h5ad` with cells/spots in rows, genes in columns, unique identifiers and raw nonnegative integer counts in `X`. Counts are aligned to checkpoint genes, normalized to 10,000 counts over matched selected genes and log1p transformed. Missing genes are zero-filled and their number is reported. Extensive missingness requires independent validation. Do not pass already log-normalized data as raw counts.
 
-The short-read input should be an AnnData object with:
+The output is cell/spot by isoform, with gene identities in `var['parent_gene_id']`. Proportions sum to one within each retained gene. They do not sum to one across the entire transcriptome and are not absolute expression estimates.
 
-- cells in `.obs_names`;
-- genes in `.var_names` or gene symbols available in `.var["gene_symbol"]`;
-- raw or count-like expression values in `.X`.
+## Paired matrices for training and evaluation
 
-Example:
+Each processed dataset directory contains:
 
-```python
-import scanpy as sc
-adata_gene = sc.read("gene_matrix.h5ad")
-```
+| File | Content |
+|---|---|
+| `x_gene_counts.npz` | SciPy sparse CSR cell-by-gene nonnegative matrix |
+| `y_isoform_counts.npz` | SciPy sparse CSR cell-by-isoform LR count matrix |
+| `obs.csv` | `cell_id` index and split columns such as donor, condition, domain or section |
+| `genes.csv` | `gene_id` column, matching X columns |
+| `isoforms.csv` | `isoform_id`, `gene_id`, `structure_id`, matching Y columns |
+| `dataset.json` | Dataset provenance and preprocessing metadata |
 
-## Long-read isoform-count matrix
+X and Y must have the same cell order. Spatial data also require `spatial_x` and `spatial_y` in `obs.csv`. Splice-chain identifiers use `gene|chromosome|strand|donor-acceptor;donor-acceptor` or the formats parsed by `short2long.structure`.
 
-The long-read input should be an AnnData object with:
+`scripts/prepare_crc.py`, `prepare_spatial.py` and `prepare_cross_platform_v2.py` adapt the original processed public releases; inspect their `--help`. Cross-platform preparation uses the author-release barcode mapping and complete intron-chain harmonization. No FASTQ alignment is involved. These scripts require files obtained separately from the original data providers.
 
-- cells in `.obs_names`;
-- isoforms in `.var_names`;
-- isoform counts in `.X`.
+The historical CRC resource supplies normalized SR expression. Its preparation script converts from log scale as recorded by that resource; those values are not recovered raw UMI counts. Preserve that provenance when reproducing historical experiments. The strict raw-count prediction interface is a separate deployment contract.
 
-Example:
-
-```python
-adata_iso = sc.read("isoform_matrix.h5ad")
-```
-
-## Paired training data
-
-For reconstructing preprocessing from an existing checkpoint, paired short-read and long-read cells should share cell identifiers. IsoVAE aligns paired cells internally.
-
-```python
-from isovae import reconstruct_preprocessor_from_training_data
-
-preprocessor = reconstruct_preprocessor_from_training_data(
-    checkpoint="path/to/model.pt",
-    adata_gene_train=adata_gene,
-    adata_iso_train=adata_iso,
-)
-```
-
-## Output format
-
-IsoVAE returns a cell-by-isoform `pandas.DataFrame`. Values are isoform-usage proportions within each gene.
-
-For a modeled gene with multiple isoforms, the usage values across those isoforms sum to approximately 1 for each cell.
+Edit `configs/benchmark.json` to point to these local datasets and annotations, relative to `--data-root`. The preparation command writes inner/final catalogues, matrices, SR-only contexts, fixed evaluation clusters, separate test truth and SHA-256 manifests. Benchmark methods share these files without changing them. Annotation files and all biological matrices stay outside Git.
