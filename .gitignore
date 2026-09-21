@@ -23,6 +23,22 @@ h5ad_raw/
 data/
 outputs/
 examples/outputs/
+third_party/
+runs/
+*.npy
+*.npz
+*.pkl
+*.fastq*
+*.fq*
+*.bam
+*.sam
+*.cram
+*.fasta*
+*.fa
+*.gtf*
+*.gff*
+*.zip
+*.tar*
 
 # OS/editor
 .DS_Store
