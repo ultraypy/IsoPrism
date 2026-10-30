@@ -2,7 +2,6 @@
 
 IsoPrism predicts **within-gene isoform proportions** for individual cells or spots from short-read gene-expression matrices. It combines short-read local context, program attention and terminal-aware isoform queries with iterative within-gene allocation. Paired long-read counts supervise training; prediction requires only a short-read matrix and a trained checkpoint. No sample FASTQ/BAM is required.
 
-This is the method previously called **Competitive-TA**. The older **IsoVAE** and **IsoBudget-v2** models are different methods, not alternative names for this implementation.
 
 ## Install
 
@@ -14,7 +13,7 @@ cd IsoPrism
 pip install -e ".[dev]"
 ```
 
-Install from GitHub. This release does not publish or update a PyPI package.
+Install from GitHub. 
 
 ## Predict
 
