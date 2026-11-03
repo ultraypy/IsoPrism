@@ -22,8 +22,7 @@ isoprism-predict --model model.pt --input-h5ad short_reads.h5ad \
   --output-h5ad isoform_proportions.h5ad --device cpu
 ```
 
-Input `X` must contain finite, nonnegative raw gene counts, with unique cell/spot and gene identifiers. Output `X` contains isoform proportions summing to one **within each gene**. `layers['context_proportions']` provides a separate local-context readout. Historical Competitive-TA checkpoints and import names remain supported.
-
+Input `X` must contain finite, nonnegative raw gene counts, with unique cell/spot and gene identifiers. Output `X` contains isoform proportions summing to one **within each gene**. `layers['context_proportions']` provides a separate local-context readout. 
 ## Benchmark
 
 Five scenarios are supported: cross-donor, cross-dataset, normal-to-tumor, cross-platform and spatial transfer. The public runner includes exactly the eight methods in the supplied benchmark table: **PCA-kNN, MLP, Context-MLP, TabResNet, FT-Transformer, BABEL, scButterfly and IsoPrism**.
@@ -44,7 +43,7 @@ Use `--methods IsoPrism` to train only our method, `--dry-run` to print the plan
 
 Results include `individual_runs.csv`, `summary.csv` and `cluster_points.csv`. Both the **maximum** and **median** cluster Spearman are explicitly named; every defined cluster point is retained. Missing scores remain `NA`.
 
-See [benchmark protocol](docs/benchmark.md) and [data format](docs/data-format.md) for details. Raw matrices, pretrained weights and prediction arrays are not included.
+See [benchmark protocol](docs/benchmark.md) and [data format](docs/data-format.md) for details. 
 
 ## Tests and legacy code
 
