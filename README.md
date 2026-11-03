@@ -52,6 +52,5 @@ pytest -q tests/test_competitive_model.py tests/test_competitive_structure.py \
   tests/test_competitive_predict.py tests/test_unified_benchmark.py tests/test_isoprism_release.py
 ```
 
-`short2long` is the compatibility implementation namespace; the public interface is `isoprism`. Old IsoVAE source remains in `src/isovae` and [archived documentation](docs/legacy/overview.md), but is not installed by this package. Historical result files are not relabelled or overwritten by this release.
 
 
